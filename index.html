@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <script>
+        var timerVar = setInterval(countTimer, 1000);
+        // var totalSeconds = localStorage.getItem('counter');
+        // if (totalSeconds === null) {
+        //     totalSeconds = 0;
+        // } else {
+        //     totalSeconds++;
+        // }
+        // var totalSeconds = 0;
+        function countTimer() {
+            var totalSeconds = localStorage.getItem('counter');
+            if (totalSeconds === null) {
+                totalSeconds = 0;
+            } else {
+                ++totalSeconds
+            }
+            localStorage.setItem("counter", totalSeconds);
+            var hour = Math.floor(totalSeconds / 3600)
+            var minute = Math.floor((totalSeconds - hour * 3600) / 60)
+            var seconds = totalSeconds - (hour * 3600 + minute * 60);
+            document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds
+        }
+        function counterReset() {
+            localStorage.removeItem("counter");
+        }
+
+    </script>
+</head>
+
+<body>
+
+
+    <center>
+        <div id="timer" style="font-size: 70px; font-weight: bold;">0:0:0</div>
+        <!-- <button id="start_timer" onclick="setInterval(countTimer, 1000);">Start</button> -->
+        <button id="stop_timer" onclick="clearInterval(timerVar)">Stop Timer</button>
+        <button id="reset_timer" onclick="counterReset()">Reset Timer</button>
+        <!-- <button id="pause_timer" onclick="counterPause()">Pause Timer</button> -->
+    </center>
+
+
+</body>
+
+</html>
